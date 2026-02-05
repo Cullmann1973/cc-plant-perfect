@@ -108,15 +108,15 @@ function KPICard({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.1, duration: 0.5 }}
-      className="kpi-card rounded-xl p-5"
+      className="kpi-card rounded-xl p-5 overflow-hidden"
     >
-      <div className="flex justify-between items-start mb-3">
-        <div>
-          <h3 className="text-2xl font-bold text-white">{label}</h3>
-          <p className="text-xs text-[#666]">{description}</p>
+      <div className="flex justify-between items-start mb-3 gap-2">
+        <div className="min-w-0 flex-1">
+          <h3 className="text-xl sm:text-2xl font-bold text-white truncate">{label}</h3>
+          <p className="text-xs text-[#666] truncate">{description}</p>
         </div>
         <span
-          className={`text-xs px-2 py-1 rounded ${
+          className={`text-xs px-2 py-1 rounded flex-shrink-0 ${
             isPositive ? "bg-green-900/50 text-green-400" : "bg-red-900/50 text-red-400"
           }`}
         >
@@ -124,10 +124,10 @@ function KPICard({
           {change}
         </span>
       </div>
-      <div className="mb-3">
-        <span className="text-3xl font-bold text-white">{value}</span>
-        <span className="text-[#666] ml-1">{unit}</span>
-        <span className="text-[#666] text-sm ml-2">
+      <div className="mb-3 flex flex-wrap items-baseline gap-x-1">
+        <span className="text-2xl sm:text-3xl font-bold text-white">{value}</span>
+        <span className="text-[#666]">{unit}</span>
+        <span className="text-[#666] text-xs sm:text-sm">
           / {target}
           {unit} target
         </span>
@@ -406,20 +406,20 @@ export default function PlantPerfectPage() {
                 transition={{ delay: 0.6 }}
                 className="kpi-card rounded-xl p-6"
               >
-                <div className="flex items-center justify-between mb-6">
-                  <div>
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-3">
+                  <div className="min-w-0">
                     <h3 className="text-lg font-bold text-white">Top 10 OEE by Material</h3>
                     <p className="text-sm text-[#666]">
                       Pareto analysis showing highest performing materials
                     </p>
                   </div>
-                  <div className="flex items-center gap-4 text-sm">
+                  <div className="flex items-center gap-4 text-sm flex-shrink-0">
                     <div className="flex items-center gap-2">
-                      <div className="w-3 h-3 bg-red-600 rounded" />
+                      <div className="w-3 h-3 bg-red-600 rounded flex-shrink-0" />
                       <span className="text-[#666]">OEE %</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <div className="w-8 h-0.5 bg-green-400" />
+                      <div className="w-8 h-0.5 bg-green-400 flex-shrink-0" />
                       <span className="text-[#666]">Cumulative</span>
                     </div>
                   </div>
@@ -497,20 +497,20 @@ export default function PlantPerfectPage() {
                   transition={{ delay: index * 0.1 }}
                   className="kpi-card rounded-xl p-6"
                 >
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="flex items-center gap-3">
+                  <div className="flex items-start justify-between mb-4 gap-2">
+                    <div className="flex items-center gap-3 min-w-0 flex-1">
                       {opp.priority === "high" ? (
-                        <AlertTriangle className="w-6 h-6 text-red-500" />
+                        <AlertTriangle className="w-6 h-6 text-red-500 flex-shrink-0" />
                       ) : (
-                        <Lightbulb className="w-6 h-6 text-yellow-500" />
+                        <Lightbulb className="w-6 h-6 text-yellow-500 flex-shrink-0" />
                       )}
-                      <div>
-                        <h3 className="text-lg font-bold text-white">{opp.issue}</h3>
-                        <p className="text-sm text-[#666]">{opp.line}</p>
+                      <div className="min-w-0">
+                        <h3 className="text-lg font-bold text-white truncate">{opp.issue}</h3>
+                        <p className="text-sm text-[#666] truncate">{opp.line}</p>
                       </div>
                     </div>
                     <span
-                      className={`px-3 py-1 rounded-full text-xs font-medium ${
+                      className={`px-3 py-1 rounded-full text-xs font-medium flex-shrink-0 ${
                         opp.priority === "high"
                           ? "bg-red-900/30 text-red-400"
                           : "bg-yellow-900/30 text-yellow-400"
@@ -520,17 +520,17 @@ export default function PlantPerfectPage() {
                     </span>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-                    <div className="p-3 bg-[#111] rounded-lg">
+                    <div className="p-3 bg-[#111] rounded-lg overflow-hidden">
                       <p className="text-xs text-[#666] mb-1">Financial Impact</p>
-                      <p className="text-lg font-bold text-white">{opp.impact}</p>
+                      <p className="text-base sm:text-lg font-bold text-white truncate">{opp.impact}</p>
                     </div>
-                    <div className="p-3 bg-[#111] rounded-lg">
+                    <div className="p-3 bg-[#111] rounded-lg overflow-hidden">
                       <p className="text-xs text-[#666] mb-1">Potential OEE Gain</p>
-                      <p className="text-lg font-bold text-green-400">+{opp.potentialOEEGain}%</p>
+                      <p className="text-base sm:text-lg font-bold text-green-400">+{opp.potentialOEEGain}%</p>
                     </div>
-                    <div className="p-3 bg-[#111] rounded-lg">
+                    <div className="p-3 bg-[#111] rounded-lg overflow-hidden">
                       <p className="text-xs text-[#666] mb-1">HAL Confidence</p>
-                      <p className="text-lg font-bold text-white">
+                      <p className="text-base sm:text-lg font-bold text-white">
                         {(85 + Math.random() * 10).toFixed(1)}%
                       </p>
                     </div>
